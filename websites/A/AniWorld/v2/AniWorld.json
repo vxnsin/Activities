@@ -119,7 +119,7 @@
     "description": "Browsing anime catalog",
     "message": "Viewing animes with"
   },
-    "aniworld.catalog.state": {
+  "aniworld.catalog.state": {
     "description": "Browsing anime catalog",
     "message": "Viewing animes"
   },

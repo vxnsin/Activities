@@ -24,7 +24,7 @@
     "anicloud"
   ],
   "iframe": true,
-  "iFrameRegExp": "^https?://aniworld\\.to/.**",
+  "iFrameRegExp": "https:\\/\\/(jilliandescribecompany\\.com\\/e|loadx\\.ws\\/video)\\/[a-zA-Z0-9]+",
   "settings": [
     {
       "id": "lang",

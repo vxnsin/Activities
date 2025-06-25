@@ -230,7 +230,6 @@ presence.on('UpdateData', async () => {
   const page = document.location.pathname
   const staticPages = await getStaticPages()
 
-
   if (privacyMode) {
     await presence.setActivity({
       details: strings.browsing,
@@ -284,7 +283,7 @@ presence.on('UpdateData', async () => {
         timestamps = getTimestamps(videoData.currTime, videoData.duration)
       }
 
-      if (videoData?.paused || videoData == null) {
+      if (videoData?.paused || !videoData) {
         return presence.setActivity({
           type: ActivityType.Watching,
           details: detailsText,
