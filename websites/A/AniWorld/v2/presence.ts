@@ -6,8 +6,7 @@ const presence = new Presence({
 })
 
 async function getStrings() {
-  return presence.getStrings(
-    {
+  return presence.getStrings({
     animes: 'aniworld.animes',
     popular: 'aniworld.popular',
     guide: 'aniworld.support.guide',
@@ -32,8 +31,7 @@ async function getStrings() {
     browsing: 'aniworld.general.browsing',
     videoPaused: 'general.paused',
     videoPlaying: 'general.playing',
-    watchButton: 'aniworld.video.watchButton', 
-
+    watchButton: 'aniworld.video.watchButton',
     home: 'aniworld.home',
     profile: 'aniworld.profile',
     searchQuery: 'aniworld.search.query',
@@ -42,38 +40,35 @@ async function getStrings() {
     catalogBrowsingState: 'aniworld.catalog.state',
     supportQuestionState: 'aniworld.support.questionState',
     supportViewingQuestion: 'aniworld.support.viewingQuestion',
-
     supportQuestion: 'aniworld.support.question',
-
     buttonWatchAnime: 'general.playing',
     buttonWatchEpisode: 'general.buttonViewEpisode',
     buttonWatchMovie: 'general.buttonWatchMovie',
-    buttonViewProfile: 'general.buttonViewProfile'
-    },
-  );
+    buttonViewProfile: 'general.buttonViewProfile',
+  })
 }
 
 interface StaticPageInfo {
-  details: string;
-  smallImageKey?: Assets;
-  smallImageText?: string;
-  largeImageKey?: string;
-  largeImageText?: string;
-  state?: string;
-  buttons?: { label: string; url: string }[];
-  startTimestamp?: number;
-  endTimestamp?: number;
+  details: string
+  smallImageKey?: Assets
+  smallImageText?: string
+  largeImageKey?: string
+  largeImageText?: string
+  state?: string
+  buttons?: { label: string; url: string }[]
+  startTimestamp?: number
+  endTimestamp?: number
 }
 
 let videoData: {
-  currTime?: number;
-  duration?: number;
-  paused?: boolean;
-  title?: string | null;
-} | null = null;
+  currTime?: number
+  duration?: number
+  paused?: boolean
+  title?: string | null
+} | null = null
 
 presence.on('iFrameData', (data: unknown) => {
-  const iframeData = (data as { iframe_video?: any })?.iframe_video;
+  const iframeData = (data as { iframe_video?: any })?.iframe_video
   if (iframeData) {
     videoData = {
       currTime: iframeData.currTime,
@@ -202,17 +197,10 @@ async function getStaticPages(): Promise<{ [key: string]: StaticPageInfo }> {
   }
 }
 
-
 presence.on('UpdateData', async () => {
   strings = await getStrings()
 
-  const [
-    lang,
-    privacyMode,
-    showTitleAsPresence,
-    showCover,
-    showTimestamp,
-  ] = await Promise.all([
+  const [lang, privacyMode, showTitleAsPresence, showCover, showTimestamp] = await Promise.all([
     presence.getSetting<string>('lang').catch(() => 'en'),
     presence.getSetting<boolean>('privacy'),
     presence.getSetting<boolean>('showTitleAsPresence'),
@@ -220,12 +208,10 @@ presence.on('UpdateData', async () => {
     presence.getSetting<boolean>('timestamp'),
   ])
 
-
   if (oldLang !== lang) {
     oldLang = lang
     strings = await getStrings()
   }
-  
 
   const page = document.location.pathname
   const staticPages = await getStaticPages()
@@ -243,10 +229,11 @@ presence.on('UpdateData', async () => {
   if (page.startsWith('/anime/')) {
     const animeDataFetcher = new AnimeDataFetcher()
     const animeData = await animeDataFetcher.getAnimeData()
-    const largeImageKey = showCover ? (animeData.coverImg || 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png') : 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png'
-    
+    const largeImageKey = showCover
+      ? animeData.coverImg || 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png'
+      : 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png'
 
-    const detailsText = showTitleAsPresence ? animeData.title : "AniWorld"
+    const detailsText = showTitleAsPresence ? animeData.title : 'AniWorld'
 
     if (page.split('/').length === 4) {
       return presence.setActivity({
@@ -261,18 +248,18 @@ presence.on('UpdateData', async () => {
       })
     } else {
       const title = document.querySelector('title')?.textContent ?? ''
-        const heading = document.querySelector('h2');
-        const textWithoutSmall = heading
-          ? Array.from(heading.childNodes)
-              .filter(node => !(node.nodeType === Node.ELEMENT_NODE && (node as Element).matches('small.episodeEnglishTitle')))
-              .map(node => node.textContent ?? '')
-              .join('')
-              .trim()
-          : '';
+      const heading = document.querySelector('h2')
+      const textWithoutSmall = heading
+        ? Array.from(heading.childNodes)
+            .filter(node => !(node.nodeType === Node.ELEMENT_NODE && (node as Element).matches('small.episodeEnglishTitle')))
+            .map(node => node.textContent ?? '')
+            .join('')
+            .trim()
+        : ''
       const stateText = [title, textWithoutSmall]
         .map(t => {
-          const str = typeof t === 'string' ? t : (t && typeof (t as any).textContent === 'string' ? (t as any).textContent ?? '' : '');
-          return str.replace(/Staffel.*|Episode.*|Filme von| \| AniWorld\.to - Animes gratis online ansehen/g, '').trim();
+          const str = typeof t === 'string' ? t : (t && typeof (t as any).textContent === 'string' ? (t as any).textContent ?? '' : '')
+          return str.replace(/Staffel.*|Episode.*|Filme von| \| AniWorld\.to - Animes gratis online ansehen/g, '').trim()
         })
         .filter(Boolean)
         .join(' - ')
@@ -321,19 +308,17 @@ presence.on('UpdateData', async () => {
     })
     return
   }
-
   if (page in staticPages) {
-    const pageInfo = staticPages[page]
-
-    if (pageInfo) {
-      const { largeImageText, buttons, ...restPageInfo } = pageInfo
-      const activityData: any = {
+    const info = staticPages[page]
+    if (info) {
+      const { largeImageText, buttons, ...restPageInfo } = info
+      const activityData: Record<string, unknown> = {
         ...restPageInfo,
         largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png',
       }
 
       if (buttons && buttons.length > 0) {
-        activityData.buttons = buttons.slice(0, 2)
+        activityData.buttons = buttons.slice(0, 2) as [typeof buttons[0], typeof buttons[1]?]
       }
 
       if (largeImageText) {
@@ -341,53 +326,10 @@ presence.on('UpdateData', async () => {
       }
 
       await presence.setActivity(activityData)
+      return
     }
-    return
   }
 
-  if (page.startsWith('/user/profil/')) {
-    await presence.setActivity({
-      details: strings.profile,
-      state: document.querySelector('h1')?.textContent ?? '',
-      smallImageKey: Assets.Reading,
-      smallImageText: document.querySelector('#userDetails > div > div > div:nth-child(3) > div')?.textContent ?? '',
-      largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png',
-    })
-    return
-  }
-
-  if (page.includes('/search')) {
-    await presence.setActivity({
-      details: strings.searchQuery,
-      state: document.querySelector('#wrapper > div.container > div.pageTitle.searchResultsPageTitle > h2 > strong')?.textContent ?? '',
-      smallImageKey: Assets.Search,
-      smallImageText: strings.searchQuery,
-      largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png',
-    })
-    return
-  }
-
-  if (page.startsWith('/katalog/')) {
-    await presence.setActivity({
-      details: `${strings.catalogBrowsing} ${document.querySelector('#wrapper > div.container.marginBottom > div.pageTitle > h1 > strong')?.textContent ?? ''}`,
-      smallImageKey: Assets.Reading,
-      smallImageText: strings.catalogBrowsingState,
-      largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png',
-    })
-    return
-  }
-
-  if (page.startsWith('/support/frage/')) {
-    await presence.setActivity({
-      details: document.querySelector('#wrapper > div.container > div.pageTitle > h1')?.textContent ?? '',
-      state: strings.supportViewingQuestion,
-      smallImageKey: Assets.Question,
-      smallImageText: strings.supportQuestionState,
-      largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png',
-    })
-    return
-  }
-  
   await presence.setActivity({
     details: strings.browsing,
     smallImageKey: Assets.Reading,
