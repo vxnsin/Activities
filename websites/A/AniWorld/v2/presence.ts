@@ -49,15 +49,15 @@ async function getStrings() {
 }
 
 interface StaticPageInfo {
-  details: string
-  smallImageKey?: Assets
-  smallImageText?: string
-  largeImageKey?: string
-  largeImageText?: string
-  state?: string
-  buttons?: { label: string; url: string }[]
-  startTimestamp?: number
-  endTimestamp?: number
+  details: string;
+  smallImageKey?: Assets;
+  smallImageText?: string;
+  largeImageKey?: string;
+  largeImageText?: string;
+  state?: string;
+  buttons?: { label: string; url: string }[];
+  startTimestamp?: number;
+  endTimestamp?: number;
 }
 
 let videoData: {
@@ -246,7 +246,8 @@ presence.on('UpdateData', async () => {
         smallImageText: strings.episodeList,
         buttons: [{ label: strings.buttonWatchAnime, url: document.location.href }],
       })
-    } else {
+    } 
+    else {
       const title = document.querySelector('title')?.textContent ?? ''
       const heading = document.querySelector('h2')
       const textWithoutSmall = heading
@@ -257,7 +258,7 @@ presence.on('UpdateData', async () => {
             .trim()
         : ''
       const stateText = [title, textWithoutSmall]
-        .map(t => {
+        .map((t) => {
           const str = typeof t === 'string' ? t : (t && typeof (t as any).textContent === 'string' ? (t as any).textContent ?? '' : '')
           return str.replace(/Staffel.*|Episode.*|Filme von| \| AniWorld\.to - Animes gratis online ansehen/g, '').trim()
         })
