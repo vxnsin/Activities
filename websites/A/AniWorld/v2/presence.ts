@@ -230,6 +230,17 @@ presence.on('UpdateData', async () => {
   const page = document.location.pathname
   const staticPages = await getStaticPages(presence)
 
+
+  if (privacyMode) {
+    await presence.setActivity({
+      details: strings.browsing,
+      smallImageKey: Assets.Reading,
+      smallImageText: strings.browsing,
+      largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png',
+    })
+    return
+  }
+
   if (page.startsWith('/anime/')) {
     const animeDataFetcher = new AnimeDataFetcher()
     const animeData = await animeDataFetcher.getAnimeData()
@@ -248,7 +259,6 @@ presence.on('UpdateData', async () => {
         smallImageKey: Assets.Reading,
         smallImageText: strings.episodeList,
         buttons: [{ label: strings.buttonWatchAnime, url: document.location.href }],
-        startTimestamp: showTimestamp ? Math.floor(Date.now() / 1000) : undefined,
       })
     } else {
       const title = document.querySelector('title')?.textContent ?? ''
@@ -349,7 +359,7 @@ presence.on('UpdateData', async () => {
 
   if (page.includes('/search')) {
     await presence.setActivity({
-      details: 'Sucht nach:',
+      details: strings.searchQuery,
       state: document.querySelector('#wrapper > div.container > div.pageTitle.searchResultsPageTitle > h2 > strong')?.textContent ?? '',
       smallImageKey: Assets.Search,
       smallImageText: strings.searchQuery,
@@ -378,17 +388,7 @@ presence.on('UpdateData', async () => {
     })
     return
   }
-
-  if (privacyMode) {
-    await presence.setActivity({
-      details: strings.browsing,
-      smallImageKey: Assets.Reading,
-      smallImageText: strings.browsing,
-      largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png',
-    })
-    return
-  }
-
+  
   await presence.setActivity({
     details: strings.browsing,
     smallImageKey: Assets.Reading,
