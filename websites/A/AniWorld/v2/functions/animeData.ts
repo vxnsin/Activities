@@ -47,7 +47,8 @@ export class AnimeDataFetcher {
       if (json.data?.Media?.coverImage?.large) {
         return json.data.Media.coverImage.large
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Fehler bei AniList API:', error)
     }
     return undefined

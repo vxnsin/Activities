@@ -49,15 +49,15 @@ async function getStrings() {
 }
 
 interface StaticPageInfo {
-  details: string,
-  smallImageKey?: Assets,
-  smallImageText?: string,
-  largeImageKey?: string,
-  largeImageText?: string,
-  state?: string,
-  buttons?: { label: string; url: string }[],
-  startTimestamp?: number,
-  endTimestamp?: number,
+  details: string
+  smallImageKey?: Assets
+  smallImageText?: string
+  largeImageKey?: string
+  largeImageText?: string
+  state?: string
+  buttons?: { label: string, url: string }[]
+  startTimestamp?: number
+  endTimestamp?: number
 }
 
 let videoData: {
