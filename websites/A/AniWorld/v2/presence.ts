@@ -53,7 +53,7 @@ async function getStrings() {
   );
 }
 
-type StaticPageInfo = {
+interface StaticPageInfo {
   details: string;
   smallImageKey?: Assets;
   smallImageText?: string;
@@ -63,7 +63,7 @@ type StaticPageInfo = {
   buttons?: { label: string; url: string }[];
   startTimestamp?: number;
   endTimestamp?: number;
-};
+}
 
 let videoData: {
   currTime?: number;
@@ -87,7 +87,7 @@ presence.on('iFrameData', (data: unknown) => {
 let oldLang: string | null = null
 let strings: Awaited<ReturnType<typeof getStrings>>
 
-async function getStaticPages(presence: Presence): Promise<{ [key: string]: StaticPageInfo }> {
+async function getStaticPages(): Promise<{ [key: string]: StaticPageInfo }> {
   strings = await getStrings()
 
   return {
@@ -228,7 +228,7 @@ presence.on('UpdateData', async () => {
   
 
   const page = document.location.pathname
-  const staticPages = await getStaticPages(presence)
+  const staticPages = await getStaticPages()
 
 
   if (privacyMode) {
