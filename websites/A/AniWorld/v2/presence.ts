@@ -49,15 +49,15 @@ async function getStrings() {
 }
 
 interface StaticPageInfo {
-  details: string;
-  smallImageKey?: Assets;
-  smallImageText?: string;
-  largeImageKey?: string;
-  largeImageText?: string;
-  state?: string;
-  buttons?: { label: string; url: string }[];
-  startTimestamp?: number;
-  endTimestamp?: number;
+  details: string,
+  smallImageKey?: Assets,
+  smallImageText?: string,
+  largeImageKey?: string,
+  largeImageText?: string,
+  state?: string,
+  buttons?: { label: string; url: string }[],
+  startTimestamp?: number,
+  endTimestamp?: number,
 }
 
 let videoData: {
@@ -246,7 +246,7 @@ presence.on('UpdateData', async () => {
         smallImageText: strings.episodeList,
         buttons: [{ label: strings.buttonWatchAnime, url: document.location.href }],
       })
-    } 
+    }
     else {
       const title = document.querySelector('title')?.textContent ?? ''
       const heading = document.querySelector('h2')
