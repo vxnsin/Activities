@@ -1,73 +1,138 @@
 {
-  "$schema": "https://schemas.premid.app/metadata/1.13",
-  "apiVersion": 2,
-  "author": {
-    "name": "Vensin",
-    "id": "531896089096486922"
+  "aniworld.home": {
+    "description": "AniWorld homepage",
+    "message": "Viewing the homepage"
   },
-  "contributors": [
-    {
-      "name": "Emijor",
-      "id": "466885774621540372"
-    }
-  ],
-  "service": "AniWorld",
-  "description": {
-    "de": "Jetzt über 1.000+ Animes als Stream kostenlos bei AniWorld ansehen. Anime Video-On-Demand: ✓ 100% Kostenlos ✓ Sofort online ✓ Exklusive Animes",
-    "en": "Watch now over 1,000+ animes for free on AniWorld. Anime Video-On Demand: ✓ 100% Free ✓ Instantly Online ✓ Exclusive Animes",
-    "nl": "Bekijk nu meer dan 1.000+ animes gratis op AniWorld. Anime Video-On Demand: 100% Gratis ✓ Direct Online ✓ Exclusieve Animes",
-    "vi": "Xem ngay hơn 1,000+ bộ anime tại AniWorld hoàn toàn miễn phí. Anime theo nhu cầu: ✓ 100% miễn phí ✓ Trực tuyến ✓ Những bộ anime độc quyền"
+  "aniworld.animes": {
+    "description": "Show all animes",
+    "message": "Viewing all animes"
   },
-  "url": "aniworld.to",
-  "version": "2.0.0",
-  "logo": "https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png",
-  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/thumbnail.png",
-  "color": "#637cf9",
-  "category": "anime",
-  "tags": [
-    "anime",
-    "streaming",
-    "anicloud"
-  ],
-  "iframe": true,
-  "iFrameRegExp": "https:\\/\\/(jilliandescribecompany\\.com\\/e|loadx\\.ws\\/video)\\/[a-zA-Z0-9]+",
-  "settings": [
-    {
-      "id": "lang",
-      "multiLanguage": true
-    },
-    {
-      "id": "privacy",
-      "title": "Privacy Mode",
-      "icon": "fad fa-user-secret",
-      "value": false
-    },
-    {
-      "id": "showTitleAsPresence",
-      "title": "Show Anime Title as Presence",
-      "icon": "fad fa-tv",
-      "value": true,
-      "if": {
-        "privacy": false
-      }
-    },
-    {
-      "id": "showCover",
-      "title": "Show Cover Image",
-      "icon": "fas fa-images",
-      "value": true,
-      "if": {
-        "privacy": false
-      }
-    },
-    {
-      "id": "timestamp",
-      "title": "Show Timestamps",
-      "icon": "fad fa-stopwatch",
-      "value": true,
-      "if": {
-        "privacy": false
-      }
-    }
-  ]
+  "aniworld.popular": {
+    "description": "Popular animes",
+    "message": "Viewing popular animes"
+  },
+  "aniworld.support.guide": {
+    "description": "Guide",
+    "message": "How it works -"
+  },
+  "aniworld.calendar": {
+    "description": "Anime calendar",
+    "message": "Anime calendar - "
+  },
+  "aniworld.random": {
+    "description": "Anime randomizer",
+    "message": "The anime randomizer"
+  },
+  "aniworld.new": {
+    "description": "New animes",
+    "message": "Viewing new animes"
+  },
+  "aniworld.terms": {
+    "description": "Terms of service",
+    "message": "Viewing the terms of service"
+  },
+  "aniworld.dmca": {
+    "description": "Digital Millennium Copyright Act from 1998",
+    "message": "Reading the DMCA article"
+  },
+  "aniworld.wishes": {
+    "description": "Anime wishes",
+    "message": "Wishing for animes"
+  },
+  "aniworld.login": {
+    "description": "Login",
+    "message": "Logging in"
+  },
+  "aniworld.registration": {
+    "description": "Registration",
+    "message": "Registering"
+  },
+  "aniworld.account": {
+    "description": "Account area",
+    "message": "Viewing the account"
+  },
+  "aniworld.messages": {
+    "description": "Messages",
+    "message": "Checking messages"
+  },
+  "aniworld.notifications": {
+    "description": "Notifications",
+    "message": "Checking notifications"
+  },
+  "aniworld.support": {
+    "description": "Support area",
+    "message": "In the support area"
+  },
+  "aniworld.watchlist": {
+    "description": "Watchlist",
+    "message": "Viewing the watchlist"
+  },
+  "aniworld.subscribed": {
+    "description": "Subscribed animes",
+    "message": "Viewing subscribed animes"
+  },
+  "aniworld.settings": {
+    "description": "Account settings",
+    "message": "Changing account settings"
+  },
+  "aniworld.support.faq": {
+    "description": "FAQ",
+    "message": "Viewing FAQ"
+  },
+  "aniworld.support.help": {
+    "description": "Help & support",
+    "message": "In the help & support area"
+  },
+  "aniworld.edit.info": {
+    "description": "Suggest series information",
+    "message": "Suggesting new series information"
+  },
+  "aniworld.catalog": {
+    "description": "Anime catalog",
+    "message": "Browsing the catalog"
+  },
+  "aniworld.support.question": {
+    "description": "Viewing support question",
+    "message": "Viewing a question"
+  },
+  "aniworld.genre": {
+    "description": "Browse genre catalog",
+    "message": "Browsing the catalog"
+  },
+  "aniworld.unknown": {
+    "description": "Unknown page",
+    "message": "On an unknown page"
+  },
+  "aniworld.episodeList": {
+    "description": "Viewing the episode list",
+    "message": "Viewing the episode list"
+  },
+  "aniworld.search.query": {
+    "description": "Searching text",
+    "message": "Searching for:"
+  },
+  "aniworld.search.loading": {
+    "description": "Searching loading text",
+    "message": "Searching..."
+  },
+  "aniworld.catalog.browsing": {
+    "description": "Browsing anime catalog",
+    "message": "Viewing animes with"
+  },
+  "aniworld.catalog.state": {
+    "description": "Browsing anime catalog",
+    "message": "Viewing animes"
+  },
+  "aniworld.support.questionState": {
+    "description": "State text when viewing support question",
+    "message": "Question in the support area"
+  },
+  "aniworld.support.viewingQuestion": {
+    "description": "Viewing a support question text",
+    "message": "Viewing a question..."
+  },
+  "aniworld.browsing": {
+    "description": "General browsing state",
+    "message": "Browsing AniWorld"
+  }
 }
