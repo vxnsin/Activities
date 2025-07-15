@@ -130,5 +130,9 @@
   "aniworld.support.viewingQuestion": {
     "description": "Viewing a support question text",
     "message": "Viewing a question..."
+  },
+  "aniworld.browsing": {
+    "description": "General browsing state",
+    "message": "Browsing AniWorld"
   }
 }
