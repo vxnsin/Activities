@@ -9,11 +9,11 @@ async function getStrings() {
   return presence.getStrings({
     videoPaused: 'general.paused',
     videoPlaying: 'general.playing',
-    buttonWatchAnime: 'general.playing',
+    buttonWatchAnime: 'general.buttonWatchAnime',
     buttonWatchEpisode: 'general.buttonViewEpisode',
     buttonWatchMovie: 'general.buttonWatchMovie',
     buttonViewProfile: 'general.buttonViewProfile',
-    account: 'aniworld.account',
+    account: 'general.viewAccount',
     animes: 'aniworld.animes',
     calendar: 'aniworld.calendar',
     catalogBrowsing: 'aniworld.catalog.browsing',
@@ -22,20 +22,20 @@ async function getStrings() {
     editinfo: 'aniworld.edit.info',
     episodeList: 'aniworld.episodeList',
     guide: 'aniworld.support.guide',
-    home: 'aniworld.home',
+    home: 'general.viewHome',
     login: 'aniworld.login',
     messages: 'aniworld.messages',
     new: 'aniworld.new',
     notifications: 'aniworld.notifications',
     popular: 'aniworld.popular',
-    profile: 'aniworld.profile',
+    profile: 'general.viewProfile',
     random: 'aniworld.random',
     registration: 'aniworld.registration',
     searchLoading: 'aniworld.search.loading',
     searchQuery: 'aniworld.search.query',
     settings: 'aniworld.settings',
     subscribed: 'aniworld.subscribed',
-    terms: 'aniworld.terms',
+    terms: 'general.terms',
     watchlist: 'aniworld.watchlist',
     wishes: 'aniworld.wishes',
     faq: 'aniworld.support.faq',
@@ -43,7 +43,7 @@ async function getStrings() {
     supportQuestion: 'aniworld.support.question',
     supportQuestionState: 'aniworld.support.questionState',
     supportViewingQuestion: 'aniworld.support.viewingQuestion',
-    browsing: 'aniworld.browsing',
+    browsing: 'general.browsing',
   })
 }
 
@@ -193,7 +193,31 @@ async function getStaticPages(): Promise<{ [key: string]: StaticPageInfo }> {
       smallImageKey: Assets.Writing,
       smallImageText: strings.editinfo,
     },
+    '/user/profil': {
+      details: strings.profile,
+      smallImageKey: Assets.Reading,
+      smallImageText: strings.profile,
+    },
   }
+}
+
+
+let lastAnimeKey: string | null = null
+let cachedAnimeData: Awaited<ReturnType<AnimeDataFetcher['loadAnimeData']>> | null = null
+
+function getAnimeKeyFromUrl(url: string): string | null {
+  const match = url.match(/\/anime\/stream\/([^/]+\/staffel-\d+)/)
+  return match && typeof match[1] === 'string' ? match[1] : null
+}
+
+async function getCachedAnimeData(): Promise<AnimeDataFetcher['animeData'] | null> {
+  const key = getAnimeKeyFromUrl(window.location.pathname)
+  if (key && key !== lastAnimeKey) {
+    const animeDataFetcher = new AnimeDataFetcher()
+    cachedAnimeData = await animeDataFetcher.loadAnimeData()
+    lastAnimeKey = key
+  }
+  return cachedAnimeData
 }
 
 presence.on('UpdateData', async () => {
@@ -226,79 +250,82 @@ presence.on('UpdateData', async () => {
   }
 
   if (page.startsWith('/anime/')) {
-    const animeDataFetcher = new AnimeDataFetcher()
-    const animeData = await animeDataFetcher.getAnimeData()
+    const hasEpisode = page.includes('episode-')
+
+    const animeData = await getCachedAnimeData()
+    const detailsText = showTitleAsPresence ? animeData?.title ?? 'AniWorld' : 'AniWorld'
     const largeImageKey = showCover
-      ? animeData.coverImg || 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png'
+      ? animeData?.coverImg || 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png'
       : 'https://cdn.rcd.gg/PreMiD/websites/A/AniWorld/assets/logo.png'
 
-    const detailsText = showTitleAsPresence ? animeData.title : 'AniWorld'
-
-    if (page.split('/').length === 4) {
-      return presence.setActivity({
+    if (!hasEpisode) {
+      await presence.setActivity({
         type: ActivityType.Watching,
         details: detailsText,
         state: strings.episodeList,
         largeImageKey,
-        largeImageText: animeData.title,
+        largeImageText: animeData?.title ?? 'AniWorld',
         smallImageKey: Assets.Reading,
         smallImageText: strings.episodeList,
         buttons: [{ label: strings.buttonWatchAnime, url: document.location.href }],
       })
+      return
     }
-    else {
-      const title = document.querySelector('title')?.textContent ?? ''
-      const heading = document.querySelector('h2')
-      const textWithoutSmall = heading
-        ? Array.from(heading.childNodes)
-            .filter(node => !(node.nodeType === Node.ELEMENT_NODE && (node as Element).matches('small.episodeEnglishTitle')))
-            .map(node => node.textContent ?? '')
-            .join('')
-            .trim()
-        : ''
-      const stateText = [title, textWithoutSmall]
-        .map((t) => {
-          const str = typeof t === 'string' ? t : (t && typeof (t as any).textContent === 'string' ? (t as any).textContent ?? '' : '')
-          return str.replace(/Staffel.*|Episode.*|Filme von| \| AniWorld\.to - Animes gratis online ansehen/g, '').trim()
-        })
-        .filter(Boolean)
-        .join(' - ')
-        .replace(/^-\s*/, '')
 
-      let timestamps: [number, number] = [Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000)]
-      if (videoData?.currTime != null && videoData?.duration != null) {
-        timestamps = getTimestamps(videoData.currTime, videoData.duration)
-      }
+    const title = document.querySelector('title')?.textContent ?? ''
+    const heading = document.querySelector('h2')
+    const textWithoutSmall = heading
+      ? Array.from(heading.childNodes)
+          .filter(node => !(node.nodeType === Node.ELEMENT_NODE && (node as Element).matches('small.episodeEnglishTitle')))
+          .map(node => node.textContent ?? '')
+          .join('')
+          .trim()
+      : ''
+    const stateText = [title, textWithoutSmall]
+      .map((t) => {
+        const str = typeof t === 'string' ? t : (t && typeof (t as any).textContent === 'string' ? (t as any).textContent ?? '' : '')
+        return str.replace(/Staffel.*|Episode.*|Filme von| \| AniWorld\.to - Animes gratis online ansehen/g, '').trim()
+      })
+      .filter(Boolean)
+      .join(' - ')
+      .replace(/^-\s*/, '')
 
-      if (videoData?.paused || !videoData) {
-        return presence.setActivity({
-          type: ActivityType.Watching,
-          details: detailsText,
-          state: stateText,
-          largeImageKey,
-          largeImageText: `Season ${animeData.season ?? 'N/A'}, Episode ${animeData.episode ?? 'N/A'}`,
-          smallImageKey: Assets.Pause,
-          smallImageText: strings.videoPaused,
-          buttons: [{ label: strings.buttonWatchAnime, url: document.location.href }],
-        })
-      }
+    let timestamps: [number, number] = [Math.floor(Date.now() / 1000), Math.floor(Date.now() / 1000)]
+    if (videoData?.currTime != null && videoData?.duration != null) {
+      timestamps = getTimestamps(videoData.currTime, videoData.duration)
+    }
 
-      return presence.setActivity({
+    if (videoData?.paused || !videoData) {
+      await presence.setActivity({
         type: ActivityType.Watching,
-        name: detailsText,
         details: detailsText,
         state: stateText,
         largeImageKey,
-        largeImageText: `Season ${animeData.season ?? 'N/A'}, Episode ${animeData.episode ?? 'N/A'}`,
-        smallImageKey: Assets.Play,
-        smallImageText: strings.videoPlaying,
-        startTimestamp: showTimestamp ? timestamps[0] : undefined,
-        endTimestamp: showTimestamp ? timestamps[1] : undefined,
+        largeImageText: `Season ${animeData?.season ?? 'N/A'}, Episode ${animeData?.episode ?? 'N/A'}`,
+        smallImageKey: Assets.Pause,
+        smallImageText: strings.videoPaused,
         buttons: [{ label: strings.buttonWatchAnime, url: document.location.href }],
       })
+      return
     }
+
+    await presence.setActivity({
+      type: ActivityType.Watching,
+      name: detailsText,
+      details: detailsText,
+      state: stateText,
+      largeImageKey,
+      largeImageText: `Season ${animeData?.season ?? 'N/A'}, Episode ${animeData?.episode ?? 'N/A'}`,
+      smallImageKey: Assets.Play,
+      smallImageText: strings.videoPlaying,
+      startTimestamp: showTimestamp ? timestamps[0] : undefined,
+      endTimestamp: showTimestamp ? timestamps[1] : undefined,
+      buttons: [{ label: strings.buttonWatchAnime, url: document.location.href }],
+    })
+    return
   }
 
+  // Home
   if (page === '/') {
     await presence.setActivity({
       details: strings.home,
@@ -308,6 +335,7 @@ presence.on('UpdateData', async () => {
     })
     return
   }
+  // Static pages
   if (page in staticPages) {
     const info = staticPages[page]
     if (info) {
@@ -330,6 +358,7 @@ presence.on('UpdateData', async () => {
     }
   }
 
+  // Default: browsing
   await presence.setActivity({
     details: strings.browsing,
     smallImageKey: Assets.Reading,
