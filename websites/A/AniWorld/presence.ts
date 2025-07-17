@@ -201,7 +201,6 @@ async function getStaticPages(): Promise<{ [key: string]: StaticPageInfo }> {
   }
 }
 
-
 let lastAnimeKey: string | null = null
 let cachedAnimeData: Awaited<ReturnType<AnimeDataFetcher['loadAnimeData']>> | null = null
 
@@ -325,7 +324,6 @@ presence.on('UpdateData', async () => {
     return
   }
 
-  // Home
   if (page === '/') {
     await presence.setActivity({
       details: strings.home,
@@ -335,7 +333,7 @@ presence.on('UpdateData', async () => {
     })
     return
   }
-  // Static pages
+
   if (page in staticPages) {
     const info = staticPages[page]
     if (info) {
@@ -358,7 +356,6 @@ presence.on('UpdateData', async () => {
     }
   }
 
-  // Default: browsing
   await presence.setActivity({
     details: strings.browsing,
     smallImageKey: Assets.Reading,
