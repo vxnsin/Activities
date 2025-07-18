@@ -47,8 +47,6 @@ async function getStrings() {
   })
 }
 
-
-
 interface StaticPageInfo {
   details: string
   smallImageKey?: Assets
@@ -208,7 +206,6 @@ let cachedAnimeData: Awaited<ReturnType<AnimeDataFetcher['loadAnimeData']>> | nu
 let isLoadingAnimeData = false
 let lastLoadPromise: Promise<Awaited<ReturnType<AnimeDataFetcher['loadAnimeData']>>> | null = null
 
-
 function getAnimeKeyFromUrl(url: string): string | null {
   const match = url.match(/\/anime\/stream\/([^/]+\/staffel-\d+)/)
   return match && typeof match[1] === 'string' ? match[1] : null
@@ -223,22 +220,18 @@ async function getCachedAnimeData(): Promise<AnimeDataFetcher['animeData'] | nul
     return null
   }
 
-  // Wenn bereits geladen und Key passt, zurückgeben
   if (cachedAnimeData && lastAnimeKey === key) {
     return cachedAnimeData
   }
 
-  // Wenn gerade ein Lade-Vorgang läuft, auf diesen warten (Race Condition Schutz)
   if (isLoadingAnimeData && lastLoadPromise) {
     const data = await lastLoadPromise
-    // Prüfe, ob nach Laden immer noch der richtige Anime angezeigt wird
     if (getAnimeKeyFromUrl(window.location.pathname) === key) {
       return data
     }
-    return null // Sonst ist der Nutzer schon weitergesprungen
+    return null
   }
 
-  // Jetzt wirklich laden
   isLoadingAnimeData = true
   const animeDataFetcher = new AnimeDataFetcher()
   const loadPromise = animeDataFetcher.loadAnimeData()
@@ -246,17 +239,16 @@ async function getCachedAnimeData(): Promise<AnimeDataFetcher['animeData'] | nul
 
   try {
     const data = await loadPromise
-    // Prüfen, ob der Key noch aktuell ist (Nutzer ist vllt weiter)
     if (getAnimeKeyFromUrl(window.location.pathname) === key) {
       cachedAnimeData = data
       lastAnimeKey = key
       return data
     }
-    // Sonst nichts cachen, Nutzer war zu schnell
-    return null
-  } finally {
-    isLoadingAnimeData = false
-    lastLoadPromise = null
+    return null;
+  }
+  finally {
+    isLoadingAnimeData = false;
+    lastLoadPromise = null;
   }
 }
 
