@@ -244,11 +244,11 @@ async function getCachedAnimeData(): Promise<AnimeDataFetcher['animeData'] | nul
       lastAnimeKey = key
       return data
     }
-    return null;
+    return null
   }
   finally {
-    isLoadingAnimeData = false;
-    lastLoadPromise = null;
+    isLoadingAnimeData = false
+    lastLoadPromise = null
   }
 }
 
