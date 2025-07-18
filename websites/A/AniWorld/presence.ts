@@ -207,8 +207,8 @@ let isLoadingAnimeData = false
 let lastLoadPromise: Promise<Awaited<ReturnType<AnimeDataFetcher['loadAnimeData']>>> | null = null
 
 function getAnimeKeyFromUrl(url: string): string | null {
-  const match = url.match(/\/anime\/stream\/([^/]+\/staffel-\d+)/)
-  return match && typeof match[1] === 'string' ? match[1] : null
+  const match = url.match(/\/anime\/stream\/(.+?)\/?$/);
+  return match && typeof match[1] === 'string' ? match[1] : null;
 }
 
 async function getCachedAnimeData(): Promise<AnimeDataFetcher['animeData'] | null> {
@@ -293,6 +293,7 @@ presence.on('UpdateData', async () => {
     if (!hasEpisode) {
       await presence.setActivity({
         type: ActivityType.Watching,
+        name: detailsText,
         details: detailsText,
         state: strings.episodeList,
         largeImageKey,
@@ -330,6 +331,7 @@ presence.on('UpdateData', async () => {
     if (videoData?.paused || !videoData) {
       await presence.setActivity({
         type: ActivityType.Watching,
+        name: detailsText,
         details: detailsText,
         state: stateText,
         largeImageKey,
