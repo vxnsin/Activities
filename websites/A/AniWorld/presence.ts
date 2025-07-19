@@ -200,19 +200,17 @@ async function getStaticPages(): Promise<{ [key: string]: StaticPageInfo }> {
     },
   }
 }
-
 let lastAnimeKey: string | null = null
 let cachedAnimeData: Awaited<ReturnType<AnimeDataFetcher['loadAnimeData']>> | null = null
 let isLoadingAnimeData = false
 let lastLoadPromise: Promise<Awaited<ReturnType<AnimeDataFetcher['loadAnimeData']>>> | null = null
-
 function getAnimeKeyFromUrl(url: string): string | null {
   const match = url.match(/\/anime\/stream\/(.+?)\/?$/);
   return match && typeof match[1] === 'string' ? match[1] : null;
 }
 
 async function getCachedAnimeData(): Promise<AnimeDataFetcher['animeData'] | null> {
-  const key = getAnimeKeyFromUrl(window.location.pathname)
+  const key = getAnimeKeyFromUrl(document.location.pathname)
   if (!key) {
     lastAnimeKey = null
     cachedAnimeData = null
@@ -226,7 +224,7 @@ async function getCachedAnimeData(): Promise<AnimeDataFetcher['animeData'] | nul
 
   if (isLoadingAnimeData && lastLoadPromise) {
     const data = await lastLoadPromise
-    if (getAnimeKeyFromUrl(window.location.pathname) === key) {
+    if (getAnimeKeyFromUrl(document.location.pathname) === key) {
       return data
     }
     return null
@@ -239,7 +237,7 @@ async function getCachedAnimeData(): Promise<AnimeDataFetcher['animeData'] | nul
 
   try {
     const data = await loadPromise
-    if (getAnimeKeyFromUrl(window.location.pathname) === key) {
+    if (getAnimeKeyFromUrl(document.location.pathname) === key) {
       cachedAnimeData = data
       lastAnimeKey = key
       return data
