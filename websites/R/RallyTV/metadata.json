@@ -10,9 +10,9 @@
   },
   "url": "rally.tv",
   "regExp": "^https?[:][/][/](www[.]|app[.])?rally[.]tv[/]",
-  "version": "1.0.0",
-  "logo": "https://i.ibb.co/C5n7tX9h/logo.png",
-  "thumbnail": "https://i.ibb.co/JwBpMWp9/thumbnail.png",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/R/RallyTV/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/RallyTV/assets/thumbnail.png",
   "color": "#e30613",
   "category": "videos",
   "tags": [

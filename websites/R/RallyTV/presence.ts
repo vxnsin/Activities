@@ -46,7 +46,7 @@ presence.on('UpdateData', () => {
       type: ActivityType.Watching,
       details: detailsText,
       state: stateText,
-      largeImageKey: 'https://i.ibb.co/C5n7tX9h/logo.png',
+      largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/R/RallyTV/assets/logo.png',
     }
 
     presence.setActivity(presenceData)
