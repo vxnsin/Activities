@@ -12,12 +12,16 @@
   },
   "url": "funpay.com",
   "regExp": "^https?[:][/][/](www[.])?funpay[.]com[/]",
-  "version": "1.0.0",
-  "logo": "https://images2.imgbox.com/03/52/AEdt03Sg_o.jpg",
-  "thumbnail": "https://images2.imgbox.com/ee/68/6pZ9xTdR_o.jpg",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/F/FunPay/assets/logo.jpg",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/FunPay/assets/thumbnail.jpg",
   "color": "#4054b2",
   "category": "other",
-  "tags": ["marketplace", "gaming", "trading"],
+  "tags": [
+    "marketplace",
+    "gaming",
+    "trading"
+  ],
   "settings": [
     {
       "id": "buttons",

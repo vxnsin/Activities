@@ -7,7 +7,7 @@ function stripLang(path: string) {
 
 presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
-    largeImageKey: 'https://images2.imgbox.com/03/52/AEdt03Sg_o.jpg',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/F/FunPay/assets/logo.jpg',
     startTimestamp: browsingTimestamp,
   }
 
