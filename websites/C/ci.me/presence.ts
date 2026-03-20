@@ -38,7 +38,7 @@ function parseTimeToSeconds(timeStr: string) {
 }
 
 enum ActivityAssets {
-  Logo = 'https://i.imgur.com/u090RB8.png',
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/C/ci.me/assets/logo.png',
 }
 
 let strings: Awaited<ReturnType<typeof getStrings>>

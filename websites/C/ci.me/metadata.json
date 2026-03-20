@@ -15,9 +15,9 @@
   },
   "url": "ci.me",
   "regExp": "^https?[:][/][/]([a-z0-9-]+[.])*ci[.]me[/]",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/u090RB8.png",
-  "thumbnail": "https://i.imgur.com/gwy955v.png",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/C/ci.me/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/C/ci.me/assets/thumbnail.png",
   "color": "#000000",
   "category": "videos",
   "tags": [
