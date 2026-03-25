@@ -12,9 +12,9 @@
   },
   "url": "tropistream.fr",
   "regExp": "^https?[:][/][/]([a-z0-9-]+[.])*tropistream[.]fr[/]",
-  "version": "1.0.0",
-  "logo": "https://i.imgur.com/Vh6elpJ.png",
-  "thumbnail": "https://i.imgur.com/hYmIe5F.png",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/T/TropiStream/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/T/TropiStream/assets/thumbnail.png",
   "color": "#000000",
   "category": "videos",
   "tags": [

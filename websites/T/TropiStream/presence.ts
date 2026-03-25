@@ -5,7 +5,7 @@ const presence = new Presence({
 })
 
 const browsingTimestamp: number = Math.floor(Date.now() / 1000)
-const DEFAULT_LOGO = 'https://i.imgur.com/Vh6elpJ.png'
+const DEFAULT_LOGO = 'https://cdn.rcd.gg/PreMiD/websites/T/TropiStream/assets/logo.png'
 
 let lastValidTitle: string = ''
 let lastValidPoster: string = ''
