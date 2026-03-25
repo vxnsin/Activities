@@ -2,7 +2,7 @@ import { ActivityType, Assets, getTimestamps } from 'premid'
 
 const presence = new Presence({ clientId: '1480496528480272434' })
 const started = Math.floor(Date.now() / 1000)
-const logo = 'https://images2.imgbox.com/61/3e/k60NIdDv_o.jpg'
+const logo = 'https://cdn.rcd.gg/PreMiD/websites/J/JAM%20Club/assets/logo.jpg'
 
 let vid: { duration: number, currentTime: number, paused: boolean } | null = null
 

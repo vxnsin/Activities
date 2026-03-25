@@ -12,12 +12,16 @@
   },
   "url": "jam-club.tv",
   "regExp": "^https?[:][/][/](www[.])?jam-club[.]tv[/]",
-  "version": "1.0.0",
-  "logo": "https://images2.imgbox.com/61/3e/k60NIdDv_o.jpg",
-  "thumbnail": "https://images2.imgbox.com/27/ea/BMH0FITx_o.jpg",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/J/JAM%20Club/assets/logo.jpg",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/J/JAM%20Club/assets/thumbnail.jpg",
   "color": "#1a1a2e",
   "category": "anime",
-  "tags": ["anime", "jam", "russian-dub"],
+  "tags": [
+    "anime",
+    "jam",
+    "russian-dub"
+  ],
   "iframe": true,
   "iFrameRegExp": "(kodik[.](info|cc|biz|online)|aniqit[.]com)",
   "settings": [
