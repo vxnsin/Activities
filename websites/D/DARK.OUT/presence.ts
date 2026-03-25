@@ -3,7 +3,7 @@ const presence = new Presence({
 })
 
 enum ActivityAssets {
-  Logo = 'https://g.tobyjas.dev/darkout/icon-512.png',
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/D/DARK.OUT/assets/logo.png',
 }
 
 interface StatusData {

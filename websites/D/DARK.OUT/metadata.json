@@ -12,7 +12,10 @@
     }
   ],
   "service": "DARK.OUT",
-  "altnames": ["darkout", "dark out"],
+  "altnames": [
+    "darkout",
+    "dark out"
+  ],
   "description": {
     "en": "Kill the light. A minimalist puzzle game — flip tiles, extinguish the board.",
     "fr": "Tuez la lumière. Un jeu de puzzle minimaliste - retournez les tuiles, éteignez le plateau."
@@ -23,9 +26,9 @@
     "tobyjas.lol"
   ],
   "regExp": "^https?[:][/][/](g[.])?(tobyjas[.]dev|jsemtobias[.]cz|tobyjas[.]lol)[/]darkout[/]",
-  "version": "1.0.0",
-  "logo": "https://g.tobyjas.dev/darkout/icon-512.png",
-  "thumbnail": "https://g.tobyjas.dev/darkout/thumbnails/darkout-dusk.png",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/D/DARK.OUT/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/D/DARK.OUT/assets/thumbnail.png",
   "color": "#000000",
   "category": "games",
   "tags": [
