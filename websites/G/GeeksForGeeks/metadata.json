@@ -11,9 +11,9 @@
   },
   "url": "geeksforgeeks.org",
   "regExp": "^https?[:][/][/]([a-z0-9-]+[.])*geeksforgeeks[.]org[/]",
-  "version": "1.0.0",
-  "logo": "https://i.ibb.co/TMtyJHgR/gfg-clean-512.png",
-  "thumbnail": "https://i.ibb.co/NdH3SyXP/Screenshot-2026-03-09-221250.png",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/G/GeeksForGeeks/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/G/GeeksForGeeks/assets/thumbnail.png",
   "color": "#2F8D46",
   "category": "other",
   "tags": [
