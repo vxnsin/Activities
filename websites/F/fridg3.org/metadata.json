@@ -11,9 +11,9 @@
   },
   "url": "fridg3.org",
   "regExp": "^https?[:][/][/]([a-z0-9-]+[.])*fridg3[.]org[/]",
-  "version": "1.0.0",
-  "logo": "https://fridg3.org/resources/icon-512x512.png",
-  "thumbnail": "https://fridg3.org/data/images/bbd4a89e0dc1058e.jpg",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/F/fridg3.org/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/F/fridg3.org/assets/thumbnail.jpg",
   "color": "#3c7895",
   "category": "other",
   "tags": [
