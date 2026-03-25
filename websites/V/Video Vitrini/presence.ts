@@ -44,7 +44,7 @@ presence.on('UpdateData', async () => {
   const presenceData: PresenceData = {
     details: sayfaBasligi,
     state: 'Sitede geziniyor',
-    largeImageKey: 'https://i.ibb.co/WvyTVytv/videovitrini.png',
+    largeImageKey: 'https://cdn.rcd.gg/PreMiD/websites/V/Video%20Vitrini/assets/logo.png',
     largeImageText: 'Video Vitrini',
     type: ActivityType.Watching,
     // Discord durumuna buton ekleme kısmı
