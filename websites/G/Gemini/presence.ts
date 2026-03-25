@@ -5,7 +5,7 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum ActivityAssets {
   Logo = 'https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/logo.png',
-  Talking = 'https://i.imgur.com/aWWXjuc.png',
+  Talking = 'https://cdn.rcd.gg/PreMiD/websites/G/Gemini/assets/0.png',
 }
 
 presence.on('UpdateData', async () => {
