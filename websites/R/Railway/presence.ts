@@ -4,7 +4,7 @@ const presence = new Presence({
 const browsingTimestamp = Math.floor(Date.now() / 1000)
 
 enum ActivityAssets {
-  Logo = 'https://images2.imgbox.com/6e/77/ycpeme8m_o.png',
+  Logo = 'https://cdn.rcd.gg/PreMiD/websites/R/Railway/assets/logo.png',
 }
 
 let elapsed = browsingTimestamp

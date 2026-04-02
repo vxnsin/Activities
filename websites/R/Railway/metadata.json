@@ -9,11 +9,15 @@
   "description": {
     "en": "Railway is a full-stack cloud platform for deploying web apps, servers, databases, and more with automatic scaling, monitoring, and security."
   },
-  "url": ["railway.com", "docs.railway.com", "station.railway.com"],
+  "url": [
+    "railway.com",
+    "docs.railway.com",
+    "station.railway.com"
+  ],
   "regExp": "^https?[:][/][/]((www|docs|station)[.])?railway[.]com",
-  "version": "1.0.0",
-  "logo": "https://images2.imgbox.com/6e/77/ycpeme8m_o.png",
-  "thumbnail": "https://images2.imgbox.com/f9/26/GGcwuFjo_o.png",
+  "version": "1.0.1",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/R/Railway/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/R/Railway/assets/thumbnail.png",
   "color": "#B94CF6",
   "category": "other",
   "tags": [
